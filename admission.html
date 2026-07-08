@@ -41,13 +41,13 @@ ul{padding-left:18px;line-height:2}
 <h2 id="form">Online Admission Form</h2>
 <p class="small">Fill your details. Our team will contact you shortly.</p>
 
-<form>
-<input type="text" placeholder="Full Name" required>
-<input type="tel" placeholder="Mobile Number" required>
-<input type="tel" placeholder="WhatsApp Number">
-<input type="email" placeholder="Email Address">
+<form id="admissionForm">
+<input type="text" name="name" placeholder="Full Name" required>
+<input type="tel" name="mobile" placeholder="Mobile Number" required>
+<input type="tel" name="whatsapp" placeholder="WhatsApp Number">
+<input type="email" name="email" placeholder="Email Address">
 
-<select required>
+<select name="qualification" required>
 <option selected disabled>Select Qualification</option>
 <option>10th</option>
 <option>12th</option>
@@ -56,15 +56,15 @@ ul{padding-left:18px;line-height:2}
 <option>Graduate</option>
 </select>
 
-<select required>
+<select name="course" required>
 <option selected disabled>Select Course</option>
 <option>Mobile Repairing Course (Laptop + Smart TV + Chip Level Included)</option>
 </select>
 
-<input type="text" placeholder="City">
-<input type="text" placeholder="State">
+<input type="text" name="city" placeholder="City">
+<input type="text" name="state" placeholder="State">
 
-<select>
+<select name="gender">
 <option selected disabled>Gender</option>
 <option>Male</option>
 <option>Female</option>
@@ -75,6 +75,28 @@ ul{padding-left:18px;line-height:2}
 
 <button type="submit">Submit Application</button>
 </form>
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbwt8Ku2hNQhLuVkI1ZWjMd4mgYW-BUH1O5e5gos-UaLip0qvcKg4t8t1GicpDayBGc/exec";
+
+document.getElementById("admissionForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  const response = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+
+  if (response.ok) {
+    alert("Admission Form Submitted Successfully!");
+    this.reset();
+  } else {
+    alert("Something went wrong!");
+  }
+});
+</script>
 </div>
 
 <div class="card">
