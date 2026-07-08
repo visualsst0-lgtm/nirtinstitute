@@ -75,6 +75,21 @@ ul{padding-left:18px;line-height:2}
 
 <button type="submit">Submit Application</button>
 </form>
+<div id="successPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:9999;">
+<div style="background:#fff;padding:30px;border-radius:16px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3);">
+<div style="font-size:60px;">🎉</div>
+<h2 style="margin:10px 0;color:#1e3a8a;">Thank You!</h2>
+<p style="color:#555;line-height:1.6;">
+      Your admission application has been submitted successfully.<br><br>
+      Our team will contact you within <b>24 hours.</b>
+    </p>
+
+    <button onclick="document.getElementById('successPopup').style.display='none'"
+      style="background:#2563eb;color:#fff;border:none;padding:12px 25px;border-radius:8px;cursor:pointer;font-size:16px;">
+      OK
+    </button>
+  </div>
+</div>
 <script>
 const scriptURL = "https://script.google.com/macros/s/AKfycbwt8Ku2hNQhLuVkI1ZWjMd4mgYW-BUH1O5e5gos-UaLip0qvcKg4t8t1GicpDayBGc/exec";
 
@@ -90,10 +105,10 @@ document.getElementById("admissionForm").addEventListener("submit", async functi
   });
 
   if (response.ok) {
-    alert("Admission Form Submitted Successfully!");
+    document.getElementById("successPopup").style.display = "flex";
     this.reset();
   } else {
-    alert("Something went wrong!");
+    alert("❌ Submission failed. Please try again.");
   }
 });
 </script>
